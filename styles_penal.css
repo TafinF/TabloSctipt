@@ -1,0 +1,113 @@
+/* html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+} */
+
+.trape {
+
+    width: 150px;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #CCCCCC;
+    clip-path: polygon(100% 0%, 0% 0%, 10% 100%, 90% 100%);
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+}
+.name.k2 span{
+    margin-right: 20px;
+}
+.name.k1 span{
+    margin-left: 20px;
+}
+.penalti_panel {
+    width: 1500px;
+    position: absolute;
+    align-items: center;
+    margin-top: 900px;
+    margin-left: 210px;
+}
+
+.name {
+    float: left;
+    width: 50%;
+    margin-top: -10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Roboto", sans-serif;
+    border-radius: 10px;
+    font-size: 30pt;
+}
+
+.point {
+    float: left;
+    width: 45%;
+    text-align: center;
+    margin-top: -49px;
+    background: #FFFF66;
+    font-size: 40pt;
+    font-family: "Roboto", sans-serif;
+}
+
+.k1 {
+    background: rgb(153 153 255);
+}
+
+.k2 {
+    background: rgb(255 51 102);
+}
+
+#p1 {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#p2 {
+    width: 130px;
+    margin: 0 auto;
+    height: 45px;
+    border-radius: 10px;
+}
+
+#p3 {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.kard {
+    border-radius: 3px;
+    margin-left: 10px;
+    width: 30px;
+    height: 40px;
+    transform: skew(-20deg);
+    /* background-color: #FFFFFF; */
+    border: 1px;
+    border-style: solid;
+}
+
+.kard.k1 {
+    float: left;
+    background-color: #FFFFFF;
+}
+
+.kard.k2 {
+    float: right;
+    background-color: #FFFFFF;
+}
+
+#kard_holder_k1,
+#kard_holder_k2 {
+    float: left;
+    width: 50%;
+    margin-top: -10px;
+}
+
+#kard_k1_1 {
+    margin-left: 0px;
+}

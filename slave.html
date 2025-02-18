@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <script src="timer.js"></script>
+    <script>
+        let socket = new WebSocket("ws://localhost:8765");
+        console.log(socket);
+        function cli(params) {
+            socket.send("Test");
+            console.log(socket);
+
+        }
+        socket.onmessage = function (event) {
+            var incomingMessage = event.data;
+            console.log("Пришло сообщение:");
+            console.log(incomingMessage);
+            switch (incomingMessage) {
+                case "?":
+                    console.log("Представляюсь");
+                    socket.send("I_Slave");
+                    break;
+
+                default:
+                    console.log("Не знаю что делать, пришло сообщение:");
+                    console.log(incomingMessage);
+                    break;
+            }
+        };
+        socket.onclose = function (event) {
+            var incomingMessage = event.data;
+            console.log("Соединение разорвано:");
+            console.log(incomingMessage);
+        };
+        let timer
+        
+        function t_st() {
+            // timer  = new Timer(1)
+            timer.start()
+        }
+        function t_pau() {
+            timer.pause()
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            let elem = document.getElementById('time');
+            timer = new Timer(60,elem)
+        });
+    </script>
+</head>
+
+<body>
+    <button onclick="t_st()"> Start</button>
+    <button onclick="t_pau()"> Pause</button>
+    <div id="time"></div>
+</body>
+
+</html>

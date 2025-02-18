@@ -1,0 +1,48 @@
+.main {
+    float: right;
+    margin-top: 15px;
+}
+
+.e {
+    float: left;
+    transform: skew(-20deg);
+    margin-left: 5px;
+    line-height: 35px;
+    text-align: center;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+}
+
+.time,
+.text {
+    background: rgb(255 255 0);
+}
+
+
+.sp_tab {
+    display: inline-block;
+    transform: skew(20deg);
+    font-family: "Roboto", sans-serif;
+    /* font-weight: 500; */
+    font-style: normal;
+    font-size: 30pt;
+}
+
+.k1 {
+    background: rgb(153 153 255);
+}
+
+.k2 {
+    background: rgb(255 51 102);
+}
+
+#TimePanel {
+    float: left;
+    width: 250px;
+}
+
+.text {
+    display: none;
+}

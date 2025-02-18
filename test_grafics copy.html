@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles_penal.css">
+    <title></title>
+    <script>
+        function t1() {
+            let element = document.getElementsByClassName("time");
+            element[0].style.display = "none";
+            element[1].style.display = "none";
+            element = document.getElementsByClassName("text");
+            element[0].style.display = "block";
+        }
+        function t2() {
+            let element = document.getElementsByClassName("time");
+            element[0].style.display = "block";
+            element[1].style.display = "block";
+            element = document.getElementsByClassName("text");
+            element[0].style.display = "none";
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="penalti_panel">
+
+        <div class="trape">Пенальти</div>
+        <div id="p1">
+            <div class="name k1" style="text-align: left;"> <span id="iss">СШ-2 Сергиев посад</span></div>
+            <div class="name k2" style="text-align: right;"> <span id="isds">СШ-2 Сергиев посад</span></div>
+        </div>
+
+        <div id="p2">
+            <div class="point" style="border-radius: 0 0 0 10px;"> <span id="k1_point">0</span> </div>
+            <div class="point" style="width: 10%;">:</div>
+            <div class="point" style="border-radius: 0 0 10px 0;"> <span id="k2_point">0</span></div>
+        </div>
+
+
+        <div id="p3">
+            <div id="kard_holder_k1">
+                <div class="kard k1" id="kard_k1_1"></div>
+                <div class="kard k1" id="kard_k1_2"></div>
+                <div class="kard k1" id="kard_k1_3"></div>
+                <div class="kard k1" id="kard_k1_4"></div>
+                <div class="kard k1" id="kard_k1_5"></div>
+            </div>
+            <div id="kard_holder_k2">
+                <div class="kard k2" id="kard_k2_1"></div>
+                <div class="kard k2" id="kard_k2_2"></div>
+                <div class="kard k2" id="kard_k2_3"></div>
+                <div class="kard k2" id="kard_k2_4"></div>
+                <div class="kard k2" id="kard_k2_5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <button onclick="t1()"> Скрыть</button>
+    <button onclick="t2()"> Показать</button> -->
+
+
+</body>
+
+</html>
