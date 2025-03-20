@@ -1,0 +1,158 @@
+.but_stor {
+    position: relative;
+    /* width: 45px;
+    height: 30px; */
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #bcf7be;
+    /* color: white; */
+    border: none;
+    cursor: pointer;
+    margin: 0px;
+    font-size: 25pt;
+    max-width: 68.5px;
+}
+.but_plus{
+    position: relative;
+    /* width: 45px;
+    height: 30px; */
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #4CAF50;
+    /* color: white; */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    font-size: 25pt;
+    max-width: 68.5px;
+}
+.bu_min {
+    position: relative;
+    /* padding: 10px 10px; */
+    /* width: 30px;
+    height: 30px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #7a4caf;
+    /* color: white; */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0px;
+    font-size: 25pt;
+}
+
+.main_panel {
+    width: 300px;
+    /* position: relative;
+    width: 100%;
+    max-width: 400px; */
+}
+
+.bu_min:hover {
+    background-color: #5a3c7c;
+}
+
+.bu_rev {
+    border-style: none;
+    background-color: transparent;
+    padding: 0px;
+    width: 33px;
+    height: 33px;
+    margin-top: -33px;
+}
+
+.timer {
+    position: relative;
+    background-color: #bbff00;
+    display: inline-block;
+    width: 120px;
+    text-align: center;
+
+}
+
+.but_plus:hover {
+    background-color: #397c3c;
+}
+
+/* .but_stor:hover::after {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    color: rgba(255, 255, 255, 0.678);
+} */
+
+
+/* .container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+} */
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.input-container input {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+.button {
+    border-style: none;
+    background-color: transparent;
+    padding: 0px;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button svg{
+    fill: transparent;
+}
+
+.button svg:hover{
+    fill:#4CAF50;
+    transition: fill 0.5s;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 10px; */
+    padding: 0px;
+}
+.contTab {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin-bottom: 10px; */
+    padding: 0px;
+}
+
+.button-group {
+    display: flex;
+}
+
+.timer2 {
+    margin: 0 20px;
+    font-size: 20pt;
+}

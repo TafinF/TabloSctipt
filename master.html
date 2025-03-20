@@ -7,44 +7,15 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
-    <script>
-        const Comand = {
-            Timer_Start: "TSt",
-            Timer_Pause: "TPa"
-        }
-        let socket = new WebSocket("ws://localhost:8765");
-        console.log(socket);
-        function cli(params) {
-            socket.send("Test");
-            console.log(socket);
-
-        }
-        socket.onmessage = function (event) {
-            var incomingMessage = event.data;
-            console.log("Пришло сообщение:");
-            console.log(incomingMessage);
-            switch (incomingMessage) {
-                case "?":
-                console.log("Представляюсь");
-                    socket.send("I_Master");
-                    break;
-
-                default:
-                    console.log("Не знаю что делать, пришло сообщение:");
-                    console.log(incomingMessage);
-                    break;
-            }
-        };
-        socket.onclose = function (event) {
-            var incomingMessage = event.data;
-            console.log("Соединение разорвано:");
-            console.log(incomingMessage);
-        };
-    </script>
+    <script src="master_code.js"></script>
 </head>
 
 <body>
-    <button onclick="cli()"> Buton</button>
+    <button onclick="cl_Timer_Start()"> Старт</button>
+    <button onclick="cl_Timer_Pause()"> Стоп</button>
+    <button onclick="cl_Point_Add_K1()"> Счёт + к1</button>
+    <button onclick="cl_Point_Add_K2()"> Счёт + к2</button>
+    <button onclick="cl_Komand_Name()"> название</button>
 </body>
 
 </html>
