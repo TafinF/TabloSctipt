@@ -9,8 +9,8 @@ const Comand = {
     Point_Sub_K2: "PSK2",
     Komand_Name_1: "K1",
     Komand_Name_2: "K2"
-
 }
+
 let socket = new WebSocket("ws://localhost:8765");
 console.log(socket);
 // function cli(params) {

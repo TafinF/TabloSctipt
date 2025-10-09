@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Пульт от табло</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    
+    <!-- <script src="comand.js"></script> -->
+    <script src="master_code.js"></script>
+    <script src="timer.js"></script>
+</head>
+
+<body>
+    <!-- <button onclick="cl_Timer_Start()"> Старт</button>
+    <button onclick="cl_Timer_Pause()"> Стоп</button>
+    <button onclick="cl_Point_Add_K1()"> Счёт + к1</button>
+    <button onclick="cl_Point_Add_K2()"> Счёт + к2</button>
+    <button onclick="cl_Komand_Name()"> название</button> -->
+    <div class="bottom" id="divbot">
+        <div class="stoka">
+            <div style="display: inline-block;">
+                <input type="text" id="name" name="name" size="30" />
+            <label for="name" >Команда слева:</label> </div>
+            
+
+            <div style="display: inline-block;">
+                <div style="display: inline-block;">
+                <input type="text" id="name" name="name" size="30" />
+            <label for="name" >Команда слева:</label> </div>
+                <label for="name" style="display: block;">Команда слева:</label>
+                <input type="text" id="name" name="name" size="15" style="display: block;" />
+                <button type="button" class="big" onclick="btn_click_add(1,'k1_point',this)">Счёт +</button>
+                <button type="button" onclick="btn_click_add(-1,'k1_point',this)">Счёт -</button>
+
+            </div>
+            <div style="display: inline-block;"><label for="name2" style="display: block;">Команда справа:</label>
+                <input type="text" id="name2" name="name2" size="15" style="display: block;" />
+                <button type="button" onclick="btn_click_add(-1,'k2_point',this)">Счёт -</button>
+                <button type="button" class="big" onclick="btn_click_add(1,'k2_point',this)">Счёт +</button>
+            </div>
+            <div style="display: inline-block;"><button type="button" class="big" onclick="btn_click_load(true)"
+                    style="display: block;">Загрузить названия<br>и новый матч</button>
+                <button type="button" onclick="btn_click_revers()">Реверс</button>
+            </div>
+            <!-- </div>
+        <div class="stoka"> -->
+            <div style="display: inline-block;">
+                <button type="button" onclick="btn_click_nulPoint()" style="display: block;">Обнулить счёт</button>
+                <button type="button" onclick="btn_click_load(false)">Загрузить данные</button>
+            </div>
+
+            <div style="display: inline-block;"> <button type="button" onclick="timeNew()" style="display: block;"
+                    id="buSetTimeManual">выставить на 15:00</button>
+                <button type="button" onclick="setNumberTime(1)" style="display: block;">тайм 1</button>
+                <button type="button" onclick="setNumberTime(2)" style="display: block;">тайм 2</button>
+            </div>
+            <button type="button" onclick="stop()" id="pause" disabled>Пауза</button>
+            <button type="button" class="big" onclick="start()" id="start">Старт</button>
+            <button type="button" class="big" id="perer" onclick="setPere()">Перерыв</button>
+            <button type="button" disabled id="seclent"></button>
+            <button type="button" onclick="retimeMinute(+1)">Длинее</button>
+            <button type="button" onclick="retimeMinute(-1)">Короче</button>
+        </div>
+
+    </div>
+</body>
+
+</html>

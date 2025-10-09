@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления командами</title>
+    <style>
+        .main-container {
+            width: 500px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+        }
+        
+        .containers-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .half-width {
+            width: 240px;
+        }
+        
+        .fourth-width {
+            width: 200px;
+        }
+        
+        .row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .label {
+            margin-right: 10px;
+            min-width: 180px;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+        
+        input[type="time"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        
+        button {
+            padding: 8px 15px; /* Установлен padding для всех кнопок */
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .teams-row {
+            justify-content: space-between;
+        }
+        
+        .team-input {
+            display: flex;
+            flex-direction: column;
+            width: 48%;
+        }
+        
+        .team-input .label {
+            min-width: auto;
+            margin-bottom: 5px;
+        }
+        
+        .buttons-row {
+            justify-content: space-between;
+        }
+        
+        .goal-button {
+            background-color: #28a745;
+            border-color: #28a745;
+            width: 23%;
+        }
+        
+        .goal-button:hover {
+            background-color: #218838;
+        }
+        
+        .score-button {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            width: 23%;
+        }
+        
+        .score-button:hover {
+            background-color: #c82333;
+        }
+        
+        .foul-button {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+            width: 23%;
+        }
+        
+        .foul-button:hover {
+            background-color: #e0a800;
+        }
+        
+        .cancel-button {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+            width: 23%;
+        }
+        
+        .cancel-button:hover {
+            background-color: #c82333;
+        }
+        
+        .placeholder-input {
+            width: 100%;
+        }
+        
+        /* Стили для второго дива */
+        .time-label {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stop-button {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            width: 50%; /* Ширина 50% */
+        }
+        
+        .stop-button:hover {
+            background-color: #c82333;
+        }
+        
+        .team-label {
+            width: 33.33%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        
+        .score-label {
+            width: 33.33%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+        }
+        
+        .full-width-button {
+            width: 100%;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .full-width-button:hover {
+            background-color: #545b62;
+        }
+        
+        /* Стили для третьего дива */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: space-between;
+        }
+        
+        .switch-label {
+            min-width: 150px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #007bff;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+        
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: space-between;
+        }
+        
+        .radio-label {
+            min-width: 150px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .radio-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        /* Стили для кастомных радиокнопок */
+        .custom-radio {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            position: relative;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #007bff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+        
+        .radio-option input[type="radio"]:checked + .custom-radio {
+            border-color: #007bff;
+            background-color: white;
+        }
+        
+        .radio-option input[type="radio"]:checked + .custom-radio::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .radio-option input[type="radio"]:hover + .custom-radio {
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        .radio-text {
+            font-weight: normal;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .settings-button {
+            width: 100%;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .settings-button:hover {
+            background-color: #218838;
+        }
+        
+        .duration-input {
+            width: 40px;
+        }
+        
+        /* Стили для четвертого дива */
+        .play-stop-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        
+        .play-button {
+            background-color: #28a745;
+            border-color: #28a745;
+            flex: 1;
+        }
+        
+        .play-button:hover {
+            background-color: #218838;
+        }
+        
+        .stop-music-button {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            flex: 1;
+        }
+        
+        .stop-music-button:hover {
+            background-color: #c82333;
+        }
+        
+        .music-label {
+            width: 140px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .fouls-row {
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        /* Новые стили для чекбоксов в четвертом диве */
+        .fourth-switch-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: space-between;
+        }
+        
+        .fourth-switch-label {
+            width: 140px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .fourth-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        
+        .fourth-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .fourth-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .fourth-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        .fourth-switch input:checked + .fourth-slider {
+            background-color: #007bff;
+        }
+        
+        .fourth-switch input:checked + .fourth-slider:before {
+            transform: translateX(22px);
+        }
+        
+        /* Исправления для кнопок */
+        .button-group {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .second-div-buttons {
+            display: flex;
+            gap: 2.5%;
+            width: 100%;
+        }
+        
+        .second-div-buttons button {
+            width: 23%;
+        }
+        
+        /* Новые стили для последних 3 строк второго дива */
+        .second-div-buttons-row {
+            margin-bottom: 5px; /* Уменьшенный margin-bottom */
+        }
+    </style>
+</head>
+<body>
+    <!-- Первый див -->
+    <div class="main-container">
+        <!-- Первая строка: лейбл и кнопки -->
+        <div class="row justify-between">
+            <span class="label">Спаренные дефисом названия</span>
+            <div class="button-group">
+                <button id="loadNames">загрузить названия</button>
+                <button id="reverseNames">реверс названий</button>
+            </div>
+        </div>
+        
+        <!-- Вторая строка: поле ввода с плейсхолдером -->
+        <div class="row">
+            <input type="text" id="pairedNames" class="placeholder-input" placeholder="заглушка">
+        </div>
+        
+        <!-- Третья строка: поля для команд -->
+        <div class="row teams-row">
+            <div class="team-input">
+                <span class="label">Левая команда</span>
+                <input type="text" id="leftTeam" placeholder="Введите название">
+            </div>
+            <div class="team-input">
+                <span class="label">Правая команда</span>
+                <input type="text" id="rightTeam" placeholder="Введите название">
+            </div>
+        </div>
+    </div>
+
+    <!-- Второй див -->
+    <div class="main-container">
+        <!-- Первая строка: время и кнопка стоп -->
+        <div class="row justify-between">
+            <span class="time-label">12:00</span>
+            <button class="stop-button">стоп</button>
+        </div>
+        
+        <!-- Вторая строка: названия команд и счет -->
+        <div class="row justify-between">
+            <span class="team-label">команда 1</span>
+            <span class="score-label">0:0</span>
+            <span class="team-label">команда 2</span>
+        </div>
+        
+        <!-- Третья строка: кнопки (с измененным порядком для второй команды) -->
+        <div class="row justify-between second-div-buttons-row">
+            <div class="second-div-buttons">
+                <button class="goal-button">Гол</button>
+                <button class="score-button">Счёт -</button>
+                <button class="score-button">Счёт -</button>
+                <button class="goal-button">Гол</button>
+            </div>
+        </div>
+        
+        <!-- Четвертая строка: кнопка во всю ширину -->
+        <div class="row second-div-buttons-row">
+            <button class="full-width-button">стоп музыка</button>
+        </div>
+        
+        <!-- Пятая строка: кнопки для фолов (перенесена под кнопку стоп музыка) -->
+        <div class="row justify-between second-div-buttons-row">
+            <div class="second-div-buttons">
+                <button class="foul-button">Фол</button>
+                <button class="cancel-button">Отмена</button>
+                <button class="cancel-button">Отмена</button>
+                <button class="foul-button">Фол</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Третий и четвертый дивы в одной строке -->
+    <div class="containers-row">
+        <!-- Третий див (уменьшенный) -->
+        <div class="main-container half-width">
+            <!-- Первая строка: длительность тайма -->
+            <div class="row justify-between">
+                <span class="label">длительность тайма</span>
+                <input type="text" class="duration-input" placeholder="мм:сс">
+            </div>
+            
+            <!-- Вторая строка: переключатель "игра в один тайм" -->
+            <div class="switch-container">
+                <span class="switch-label">игра в один тайм</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <!-- Третья строка: переключатель 1-2 "выбрать тайм вручную" -->
+            <div class="radio-group">
+                <span class="radio-label">выбрать тайм вручную</span>
+                <div class="radio-options">
+                    <label class="radio-option">
+                        <input type="radio" name="half" value="1" checked>
+                        <span class="custom-radio"></span>
+                        <span class="radio-text">1</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="half" value="2">
+                        <span class="custom-radio"></span>
+                        <span class="radio-text">2</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Четвертая строка: кнопка задания настроек -->
+            <div class="row">
+                <button class="settings-button">задать настройки времени</button>
+            </div>
+        </div>
+
+        <!-- Четвертый див -->
+        <div class="main-container fourth-width">
+            <!-- Первая строка: переключатель "включить автосерену" -->
+            <div class="fourth-switch-container">
+                <span class="fourth-switch-label">включить автосерену</span>
+                <label class="fourth-switch">
+                    <input type="checkbox" checked>
+                    <span class="fourth-slider"></span>
+                </label>
+            </div>
+            
+            <!-- Вторая строка: переключатель "включить музыку в остановки игры" -->
+            <div class="fourth-switch-container">
+                <span class="fourth-switch-label">включить музыку в остановки игры</span>
+                <label class="fourth-switch">
+                    <input type="checkbox" checked>
+                    <span class="fourth-slider"></span>
+                </label>
+            </div>
+            
+            <!-- Третья строка: кнопки плей и стоп -->
+            <div class="row">
+                <div class="play-stop-buttons">
+                    <button class="play-button">плей</button>
+                    <button class="stop-music-button">стоп</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
