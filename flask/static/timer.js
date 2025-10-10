@@ -5,7 +5,7 @@ class Timer {
     /**
  * @param {string} timeString Время в формате ММ:СС
  */
-    constructor(timeString) {
+    constructor(timeString = "15:00") {
         // Парсим строку формата ММ:СС
         const [minutes, seconds] = timeString.split(':').map(Number);
 
@@ -71,6 +71,19 @@ class Timer {
         this.isRunning = true; // ставим флаг что таймер работает
     }
     /**
+ * Ставит таймер на паузу
+ */
+    pause() {
+        if (!this.isRunning) return; // если таймер не запущен, ничего не делаем
+
+        clearInterval(this.intervalId); // останавливаем интервал
+        this.isRunning = false;
+        this.isPaused = true;
+
+        // сохраняем оставшееся время
+        this.remainedTime_ms = this.endTime - Date.now();
+    }
+    /**
 * Отсчёт таймера, запускается каждые 200мс
 */
     #tick() {
@@ -117,16 +130,12 @@ class Timer {
     setOnComplete(callback) {
         this.onComplete = callback;
     }
+
+    /**
+* Возвращает время на которое изначально был установлен таймер
+@returns {string} Строка в формате ММ:СС
+*/
+    getDurationTimer() {
+        return this.#time_to_str(this.initialTime_ms)
+    }
 }
-
-
-
-let t = new Timer('00:05');
-t.setOnTick((ftime)=>{
-    console.log(`Осталось: ${ftime}`);
-})
-t.setOnComplete(() => {
-  console.log('Таймер завершен!');
-});
-
-t.start();

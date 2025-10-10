@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,36 +15,36 @@
             background-color: #f9f9f9;
             margin-bottom: 10px;
         }
-        
+
         .containers-row {
             display: flex;
             gap: 20px;
         }
-        
+
         .half-width {
-            width: 240px;
+            width: 238px;
         }
-        
+
         .fourth-width {
             width: 200px;
         }
-        
+
         .row {
             margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
-        
+
         .justify-between {
             justify-content: space-between;
         }
-        
+
         .label {
             margin-right: 10px;
             min-width: 180px;
             font-weight: bold;
         }
-        
+
         input[type="text"] {
             padding: 8px;
             border: 1px solid #ccc;
@@ -51,16 +52,17 @@
             margin-right: 10px;
             flex-grow: 1;
         }
-        
+
         input[type="time"] {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 3px;
             margin-right: 10px;
         }
-        
+
         button {
-            padding: 8px 15px; /* Установлен padding для всех кнопок */
+            padding: 8px 15px;
+            /* Установлен padding для всех кнопок */
             border: 1px solid #007bff;
             background-color: #007bff;
             color: white;
@@ -68,76 +70,76 @@
             cursor: pointer;
             font-size: 14px;
         }
-        
+
         button:hover {
             background-color: #0056b3;
         }
-        
+
         .teams-row {
             justify-content: space-between;
         }
-        
+
         .team-input {
             display: flex;
             flex-direction: column;
             width: 48%;
         }
-        
+
         .team-input .label {
             min-width: auto;
             margin-bottom: 5px;
         }
-        
+
         .buttons-row {
             justify-content: space-between;
         }
-        
+
         .goal-button {
             background-color: #28a745;
             border-color: #28a745;
             width: 23%;
         }
-        
+
         .goal-button:hover {
             background-color: #218838;
         }
-        
+
         .score-button {
             background-color: #dc3545;
             border-color: #dc3545;
             width: 23%;
         }
-        
+
         .score-button:hover {
             background-color: #c82333;
         }
-        
+
         .foul-button {
             background-color: #ffc107;
             border-color: #ffc107;
             color: #212529;
             width: 23%;
         }
-        
+
         .foul-button:hover {
             background-color: #e0a800;
         }
-        
+
         .cancel-button {
             background-color: #dc3545;
             border-color: #dc3545;
             color: white;
             width: 23%;
         }
-        
+
         .cancel-button:hover {
             background-color: #c82333;
         }
-        
+
         .placeholder-input {
             width: 100%;
         }
-        
+
         /* Стили для второго дива */
         .time-label {
             font-size: 24px;
@@ -145,19 +147,29 @@
             text-align: center;
             flex: 1;
         }
-        
+
         .stop-button {
             background-color: #dc3545;
             border-color: #dc3545;
-            width: 50%; /* Ширина 50% */
+            width: 50%;
         }
-        
+
         .stop-button:hover {
             background-color: #c82333;
         }
-        
+
+        .start-button {
+            background-color: #28a745;
+            border-color: #28a745;
+            width: 50%;
+        }
+
+        .start-button:hover {
+            background-color: #218838;
+        }
+
         .team-label {
-            width: 33.33%;
+            width: 45%;
             text-align: center;
             font-size: 18px;
             font-weight: bold;
@@ -165,9 +177,9 @@
             border: 1px solid #ddd;
             background-color: #fff;
         }
-        
+
         .score-label {
-            width: 33.33%;
+            width: 10%;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
@@ -175,17 +187,17 @@
             border: 1px solid #ddd;
             background-color: #f8f9fa;
         }
-        
+
         .full-width-button {
-            width: 100%;
+            width: 99.5%;
             background-color: #6c757d;
             border-color: #6c757d;
         }
-        
+
         .full-width-button:hover {
             background-color: #545b62;
         }
-        
+
         /* Стили для третьего дива */
         .switch-container {
             display: flex;
@@ -193,26 +205,26 @@
             margin-bottom: 15px;
             justify-content: space-between;
         }
-        
+
         .switch-label {
             min-width: 150px;
             font-weight: bold;
             font-size: 14px;
         }
-        
+
         .switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 28px;
         }
-        
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -224,7 +236,7 @@
             transition: .4s;
             border-radius: 34px;
         }
-        
+
         .slider:before {
             position: absolute;
             content: "";
@@ -236,40 +248,40 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
-        input:checked + .slider {
+
+        input:checked+.slider {
             background-color: #007bff;
         }
-        
-        input:checked + .slider:before {
+
+        input:checked+.slider:before {
             transform: translateX(22px);
         }
-        
+
         .radio-group {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
             justify-content: space-between;
         }
-        
+
         .radio-label {
             min-width: 150px;
             font-weight: bold;
             font-size: 14px;
         }
-        
+
         .radio-options {
             display: flex;
             gap: 15px;
         }
-        
+
         .radio-option {
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
         }
-        
+
         /* Стили для кастомных радиокнопок */
         .custom-radio {
             display: inline-block;
@@ -281,7 +293,7 @@
             background-color: white;
             transition: all 0.3s ease;
         }
-        
+
         .custom-radio::after {
             content: '';
             width: 8px;
@@ -294,83 +306,83 @@
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.3s ease;
         }
-        
+
         .radio-option input[type="radio"] {
             display: none;
         }
-        
-        .radio-option input[type="radio"]:checked + .custom-radio {
+
+        .radio-option input[type="radio"]:checked+.custom-radio {
             border-color: #007bff;
             background-color: white;
         }
-        
-        .radio-option input[type="radio"]:checked + .custom-radio::after {
+
+        .radio-option input[type="radio"]:checked+.custom-radio::after {
             transform: translate(-50%, -50%) scale(1);
         }
-        
-        .radio-option input[type="radio"]:hover + .custom-radio {
+
+        .radio-option input[type="radio"]:hover+.custom-radio {
             border-color: #0056b3;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
-        
+
         .radio-text {
             font-weight: normal;
             color: #333;
             font-size: 14px;
         }
-        
+
         .settings-button {
             width: 100%;
             background-color: #28a745;
             border-color: #28a745;
         }
-        
+
         .settings-button:hover {
             background-color: #218838;
         }
-        
+
         .duration-input {
             width: 40px;
         }
-        
+
         /* Стили для четвертого дива */
         .play-stop-buttons {
             display: flex;
             gap: 10px;
             justify-content: space-between;
         }
-        
+
         .play-button {
             background-color: #28a745;
             border-color: #28a745;
             flex: 1;
         }
-        
+
         .play-button:hover {
             background-color: #218838;
         }
-        
+
         .stop-music-button {
             background-color: #dc3545;
             border-color: #dc3545;
             flex: 1;
         }
-        
+
         .stop-music-button:hover {
             background-color: #c82333;
         }
-        
+
         .music-label {
             width: 140px;
             font-weight: bold;
             font-size: 14px;
         }
-        
+
         .fouls-row {
             justify-content: space-between;
             margin-top: 10px;
         }
-        
+
         /* Новые стили для чекбоксов в четвертом диве */
         .fourth-switch-container {
             display: flex;
@@ -378,26 +390,26 @@
             margin-bottom: 15px;
             justify-content: space-between;
         }
-        
+
         .fourth-switch-label {
             width: 140px;
             font-weight: bold;
             font-size: 14px;
         }
-        
+
         .fourth-switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 28px;
         }
-        
+
         .fourth-switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .fourth-slider {
             position: absolute;
             cursor: pointer;
@@ -409,7 +421,7 @@
             transition: .4s;
             border-radius: 34px;
         }
-        
+
         .fourth-slider:before {
             position: absolute;
             content: "";
@@ -421,54 +433,117 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
-        .fourth-switch input:checked + .fourth-slider {
+
+        .fourth-switch input:checked+.fourth-slider {
             background-color: #007bff;
         }
-        
-        .fourth-switch input:checked + .fourth-slider:before {
+
+        .fourth-switch input:checked+.fourth-slider:before {
             transform: translateX(22px);
         }
-        
+
         /* Исправления для кнопок */
         .button-group {
             display: flex;
             gap: 5px;
         }
-        
+
         .second-div-buttons {
             display: flex;
             gap: 2.5%;
             width: 100%;
         }
-        
+
         .second-div-buttons button {
             width: 23%;
         }
-        
+
         /* Новые стили для последних 3 строк второго дива */
         .second-div-buttons-row {
-            margin-bottom: 5px; /* Уменьшенный margin-bottom */
+            margin-bottom: 5px;
+            /* Уменьшенный margin-bottom */
+        }
+
+        /* Стили для пятого дива с логом */
+        #log-container {
+            max-height: 200px;
+            min-height: 200px;
+        }
+
+        #log-container div {
+            margin-bottom: 5px;
+            padding: 2px 5px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        #log-container div:last-child {
+            border-bottom: none;
+        }
+
+        .log-entry {
+            padding: 3px 5px;
+            margin-bottom: 3px;
+            border-left: 3px solid #007bff;
+            background-color: #f8f9fa;
+        }
+
+        .log-system {
+            border-left-color: #6c757d;
+            background-color: #e9ecef;
+        }
+
+        .log-goal {
+            border-left-color: #28a745;
+            background-color: #d4edda;
+            font-weight: bold;
+        }
+
+        .log-warning {
+            border-left-color: #ffc107;
+            background-color: #fff3cd;
+        }
+
+        .log-foul {
+            border-left-color: #dc3545;
+            background-color: #f8d7da;
+        }
+
+        .log-time {
+            color: #6c757d;
+            font-size: 10px;
+            margin-right: 5px;
         }
     </style>
+    <script src="{{ url_for('static', filename='timer.js') }}"></script>
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+    <script src="{{ url_for('static', filename='teamsName.js') }}"></script>
+    <script src="{{ url_for('static', filename='timeFieldValidation.js') }}"></script>
+    <script src="{{ url_for('static', filename='log.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script>
+
+    </script>
 </head>
+
 <body>
     <!-- Первый див -->
     <div class="main-container">
         <!-- Первая строка: лейбл и кнопки -->
         <div class="row justify-between">
-            <span class="label">Спаренные дефисом названия</span>
+            <span class="label">Спаренные подчёркиваниями названия</span>
             <div class="button-group">
                 <button id="loadNames">загрузить названия</button>
                 <button id="reverseNames">реверс названий</button>
             </div>
         </div>
-        
+
         <!-- Вторая строка: поле ввода с плейсхолдером -->
         <div class="row">
-            <input type="text" id="pairedNames" class="placeholder-input" placeholder="заглушка">
+            <input type="text" id="pairedNames" class="placeholder-input"
+                placeholder="Введите названия в формате Команда1__Команда2">
         </div>
-        
+
         <!-- Третья строка: поля для команд -->
         <div class="row teams-row">
             <div class="team-input">
@@ -486,32 +561,32 @@
     <div class="main-container">
         <!-- Первая строка: время и кнопка стоп -->
         <div class="row justify-between">
-            <span class="time-label">12:00</span>
-            <button class="stop-button">стоп</button>
+            <span class="time-label" id="time_label">12:00</span>
+            <button class="start-button" id="bu_time_stat_stop">Старт</button>
         </div>
-        
+
         <!-- Вторая строка: названия команд и счет -->
         <div class="row justify-between">
-            <span class="team-label">команда 1</span>
-            <span class="score-label">0:0</span>
-            <span class="team-label">команда 2</span>
+            <span class="team-label" id="team_label_left">команда 1</span>
+            <span class="score-label" id="score_label">0:0</span>
+            <span class="team-label" id="team_label_right">команда 2</span>
         </div>
-        
+
         <!-- Третья строка: кнопки (с измененным порядком для второй команды) -->
         <div class="row justify-between second-div-buttons-row">
             <div class="second-div-buttons">
-                <button class="goal-button">Гол</button>
-                <button class="score-button">Счёт -</button>
-                <button class="score-button">Счёт -</button>
-                <button class="goal-button">Гол</button>
+                <button class="goal-button" id="goal_bu_left_add">Гол</button>
+                <button class="score-button" id="goal_bu_left_sub">Счёт -</button>
+                <button class="score-button" id="goal_bu_right_sub">Счёт -</button>
+                <button class="goal-button" id="goal_bu_right_add">Гол</button>
             </div>
         </div>
-        
+
         <!-- Четвертая строка: кнопка во всю ширину -->
         <div class="row second-div-buttons-row">
             <button class="full-width-button">стоп музыка</button>
         </div>
-        
+
         <!-- Пятая строка: кнопки для фолов (перенесена под кнопку стоп музыка) -->
         <div class="row justify-between second-div-buttons-row">
             <div class="second-div-buttons">
@@ -530,9 +605,9 @@
             <!-- Первая строка: длительность тайма -->
             <div class="row justify-between">
                 <span class="label">длительность тайма</span>
-                <input type="text" class="duration-input" placeholder="мм:сс">
+                <input type="text" class="duration-input" id="duration_input" placeholder="мм:сс">
             </div>
-            
+
             <!-- Вторая строка: переключатель "игра в один тайм" -->
             <div class="switch-container">
                 <span class="switch-label">игра в один тайм</span>
@@ -541,7 +616,7 @@
                     <span class="slider"></span>
                 </label>
             </div>
-            
+
             <!-- Третья строка: переключатель 1-2 "выбрать тайм вручную" -->
             <div class="radio-group">
                 <span class="radio-label">выбрать тайм вручную</span>
@@ -558,10 +633,10 @@
                     </label>
                 </div>
             </div>
-            
+
             <!-- Четвертая строка: кнопка задания настроек -->
             <div class="row">
-                <button class="settings-button">задать настройки времени</button>
+                <button class="settings-button" id="bu_set_time">задать настройки времени</button>
             </div>
         </div>
 
@@ -575,7 +650,7 @@
                     <span class="fourth-slider"></span>
                 </label>
             </div>
-            
+
             <!-- Вторая строка: переключатель "включить музыку в остановки игры" -->
             <div class="fourth-switch-container">
                 <span class="fourth-switch-label">включить музыку в остановки игры</span>
@@ -584,7 +659,7 @@
                     <span class="fourth-slider"></span>
                 </label>
             </div>
-            
+
             <!-- Третья строка: кнопки плей и стоп -->
             <div class="row">
                 <div class="play-stop-buttons">
@@ -594,5 +669,19 @@
             </div>
         </div>
     </div>
+    <div class="main-container">
+        <div class="row">
+            <span class="label">Лог событий</span>
+        </div>
+        <div class="row">
+            <div id="log-container"
+                style="width: 100%; height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background-color: white; font-family: monospace; font-size: 12px;">
+                <!-- Здесь будет отображаться лог событий -->
+                <div>Система запущена</div>
+                <div>Готов к работе</div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
