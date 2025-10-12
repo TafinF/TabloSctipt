@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title></title>
+    <style>
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .main {
+            float: right;
+            /* margin-right: 5px; */
+        }
+
+        .e {
+            float: left;
+            transform: skew(-20deg);
+            margin-left: 5px;
+            line-height: 35px;
+            text-align: center;
+            padding-top: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
+        }
+
+        .time,
+        .text {
+            background: rgb(255 255 0);
+        }
+
+
+        span {
+            display: inline-block;
+            transform: skew(20deg);
+            font-family: "Roboto", sans-serif;
+            /* font-weight: 500; */
+            font-style: normal;
+            font-size: 30pt;
+        }
+
+        .k1 {
+            background: rgb(153 153 255);
+        }
+
+        .k2 {
+            background: rgb(255 51 102);
+        }
+
+        #TimePanel {
+            float: left;
+            width: 250px;
+        }
+
+        .text {
+            display: none;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            background: rgb(80, 80, 80);
+            left: 0;
+            width: 100%;
+            padding-left: 10px;
+        }
+
+        .stoka {
+            margin-bottom: 10px;
+        }
+
+        .big {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #bu_right,
+        #bu_left,
+        #start,
+        #pause,
+        #bu_down {
+            transition: all 0.15s ease;
+        }
+
+        #bu_right.active,
+        #bu_left.active,
+        #start.active,
+        #pause.active,
+        #bu_down.active {
+            transform: scale(0.95) translateY(2px);
+        }
+    </style>
+    <script>
+        let secondMilCount = 993;
+        let countMin = 15; // длительность тайма
+        let tim = countMin * 60;
+        let timeOut;
+        let flagPere = true;
+        let flag_time = true;
+        let currentAudio = null;
+        let isAutoAlarm = true;
+        function timerUbdate() {
+            document.getElementById("pause").disabled = false;
+            document.getElementById("start").disabled = true;
+            tim = tim - 1;
+            minutes = Math.floor(tim / 60);
+            seco = tim - minutes * 60
+            let str_out = minutes.toString().padStart(2, '0') + ":" + seco.toString().padStart(2, '0')
+            if (tim > 0) {
+                timeOut = setTimeout(timerUbdate, secondMilCount);
+            }
+            else {
+                document.getElementById('divbot').style.background = "white"
+                if (isAutoAlarm) {
+                    playRandomGoalSound(true)
+                }
+            }
+            if (tim < 30) {
+                if (flag_time) {
+                    flag_time = false;
+                    document.getElementById('divbot').style.background = "tomato"
+                } else {
+                    flag_time = true;
+                    document.getElementById('divbot').style.background = "white"
+                }
+
+            }
+            let elem = document.getElementById('time');
+            elem.textContent = str_out
+        }
+        function stop() {
+            document.getElementById("pause").disabled = true;
+            document.getElementById("start").disabled = false;
+            clearTimeout(timeOut);
+            timeOut = undefined
+        }
+        function start() {
+            if (tim == 0) {
+                return
+            }
+            if (timeOut == undefined) {
+                timerUbdate()
+            }
+        }
+        function timeNew() {
+            tim = countMin * 60;
+            document.getElementById('time').textContent = countMin.toString() + ":00";
+        }
+
+        function btn_click_load(isNulPoint) {
+            document.getElementById('divbot').style.background = "white"
+            let inp_k1 = document.getElementById('name');
+            let inp_k2 = document.getElementById('name2');
+            let out_k1 = document.getElementById('k1_name');
+            out_k1.textContent = inp_k1.value
+            let out_k2 = document.getElementById('k2_name');
+            out_k2.textContent = inp_k2.value
+            if (isNulPoint) {
+                btn_click_nulPoint()
+                timeNew()
+                document.getElementById('name').value = ""
+                document.getElementById('name2').value = ""
+                setNumberTime(1);
+            }
+            console.log("555")
+        }
+        function btn_click_revers() {
+            let out_k1 = document.getElementById('k1_name');
+            let sv1 = out_k1.textContent
+            let out_k2 = document.getElementById('k2_name');
+            out_k1.textContent = out_k2.textContent
+            out_k2.textContent = sv1
+
+            let out_p1 = document.getElementById('k1_point');
+            sv1 = out_p1.textContent
+            let out_p2 = document.getElementById('k2_point');
+            out_p1.textContent = out_p2.textContent
+            out_p2.textContent = sv1
+            console.log("555")
+        }
+        function btn_click_add(val, id, butElem) {
+            if (val == 1) {
+                playRandomGoalSound()
+            }
+            let out_p = document.getElementById(id);
+            let newVal = Number(out_p.textContent) + val
+            if (newVal >= 0) {
+                out_p.textContent = newVal
+            }
+            butElem.blur()
+        }
+        function btn_click_nulPoint() {
+            document.getElementById('k1_point').textContent = 0;
+            document.getElementById('k2_point').textContent = 0;
+        }
+        function setNumberTime(numb) {
+            document.getElementById('timeAdd').textContent = "т" + numb.toString();
+        }
+        function setPere() {
+            if (flagPere) {
+                // document.getElementById('4').style.visibility = 'hidden';
+                // document.getElementById('time').textContent = "Перерыв";
+                document.getElementById('perer').textContent = "Начать тайм 2";
+                let element = document.getElementsByClassName("time");
+                element[0].style.display = "none";
+                element[1].style.display = "none";
+                element = document.getElementsByClassName("text");
+                element[0].style.display = "block";
+                flagPere = false;
+            } else {
+                let element = document.getElementsByClassName("time");
+                element[0].style.display = "block";
+                element[1].style.display = "block";
+                element = document.getElementsByClassName("text");
+                element[0].style.display = "none";
+                // document.getElementById('4').style.visibility = 'visible';
+                document.getElementById('time').textContent = countMin.toString() + ":00";
+                document.getElementById('perer').textContent = "Перерыв";
+                timeNew();
+                setNumberTime(2);
+                flagPere = true;
+                timerUbdate();
+            }
+        }
+        function retimeMinute(val) {
+            secondMilCount += val;
+            document.getElementById('seclent').textContent = secondMilCount.toString();
+        }
+        window.onload = function () {
+            document.getElementById('buSetTimeManual').textContent = "Выставить на " + countMin.toString() + ":00";
+            document.getElementById('seclent').textContent = secondMilCount.toString();
+        }
+        function setTimeLents() {
+            let data = parseInt(document.getElementById('minCount').value)
+            if (!isNaN(data)) {
+                countMin = data;
+                tim = countMin * 60;
+                document.getElementById('buSetTimeManual').textContent = "Выставить на " + countMin.toString() + ":00";
+            }
+        }
+        function timeCiller() {
+            let eTime = document.getElementById('period')
+            let bu = document.getElementById('timeCiller')
+            if (eTime.style.display == "none") {
+                eTime.style.display = "block";
+                bu.textContent = "Скрыть тайм";
+            }
+            else {
+                eTime.style.display = "none";
+                bu.textContent = "Показать тайм";
+            }
+        }
+
+        // Функция для проигрывания случайного трека из папки "голы"
+        function playRandomGoalSound(isAlarm = false) {
+            let audioPath = ``;
+            if (isAlarm) {
+                audioPath = `alarm.mp3`;
+            } else {
+                // Список возможных аудиофайлов (добавьте свои названия файлов)
+                const audioFiles = [
+                    'goal1.mp3',
+                    'goal2.mp3',
+                    'goal3.mp3',
+                    'goal4.mp3',
+                    'goal5.mp3',
+                    'goal6.mp3',
+                    'goal7.mp3',
+                    'goal8.mp3',
+                    'goal9.mp3',
+                    'goal10.mp3'
+                ];
+
+
+
+                // Выбираем случайный файл
+                const randomFile = audioFiles[Math.floor(Math.random() * audioFiles.length)];
+
+                // Создаем путь к файлу (предполагая, что папка "голы" на одном уровне)
+                audioPath = `треки_голы/${randomFile}`;
+            }
+
+            // Останавливаем предыдущее воспроизведение, если есть
+            stopGoalSound();
+
+            // Создаем новый аудио объект
+            currentAudio = new Audio(audioPath);
+
+            // Настраиваем события
+            currentAudio.addEventListener('canplaythrough', function () {
+                // console.log(`Воспроизведение: ${randomFile}`);
+                console.log(`Воспроизведение`);
+            });
+
+            currentAudio.addEventListener('error', function (e) {
+                console.error('Ошибка загрузки аудио:', e);
+                console.log('Убедитесь, что файлы существуют по пути:', audioPath);
+            });
+            // Добавляем обработчик окончания трека
+            currentAudio.addEventListener('ended', function () {
+                // console.log(`Трек "${randomFile}" завершился`);
+                console.log(`трек кончился`);
+                // Автоматически очищаем currentAudio после окончания
+                currentAudio = null;
+            });
+            // Пытаемся воспроизвести
+            currentAudio.play().catch(error => {
+                console.error('Ошибка воспроизведения:', error);
+                console.log('Браузер может блокировать автовоспроизведение. Попробуйте вызвать функцию после действия пользователя');
+            });
+        }
+
+        // // Функция для остановки воспроизведения
+        // function stopGoalSound() {
+        //     if (currentAudio) {
+        //         currentAudio.pause();
+        //         currentAudio.currentTime = 0;
+        //         currentAudio = null;
+        //         console.log('Воспроизведение остановлено');
+        //     }
+        // }
+        // Функция для остановки воспроизведения с затуханием
+        function stopGoalSound() {
+            if (currentAudio) {
+                const fadeDuration = 1000; // 1 секунда в миллисекундах
+                const initialVolume = currentAudio.volume;
+                const fadeStep = initialVolume / (fadeDuration / 50); // шаг уменьшения громкости
+
+                // Функция плавного уменьшения громкости
+                const fadeOut = setInterval(() => {
+                    if (currentAudio.volume > fadeStep) {
+                        currentAudio.volume -= fadeStep;
+                    } else {
+                        // Когда громкость почти нулевая
+                        currentAudio.volume = 0;
+                        clearInterval(fadeOut);
+
+                        // Останавливаем воспроизведение
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                        currentAudio.volume = initialVolume; // восстанавливаем исходную громкость
+                        currentAudio = null;
+                        console.log('Воспроизведение остановлено с затуханием');
+                    }
+                }, 50); // обновляем громкость каждые 50ms
+            }
+        }
+        function autoAlarmSwith() {
+            let bu = document.getElementById('autoAlarm')
+            if (isAutoAlarm == true) {
+                isAutoAlarm = false;
+                bu.textContent = "Включить автосирену";
+            }
+            else {
+                isAutoAlarm = true;
+                bu.textContent = "Отключить автосирену";
+            }
+        }
+        document.addEventListener('keydown', function (event) {
+            if (event.repeat) {
+                return
+            }
+            let id
+            if (event.key === 'ArrowRight') {
+                id = 'bu_right';
+            }
+            if (event.key === 'ArrowLeft') {
+                id = 'bu_left';
+            }
+            if (event.key === 'ArrowUp') {
+                if (document.getElementById("pause").disabled) {
+                    id = 'start';
+                } else {
+                    id = 'pause';
+                }
+            }
+            if (event.key === 'ArrowDown') {
+                id = 'bu_down';
+            }
+            button = document.getElementById(id);
+            if (button) {
+                // Добавляем класс активного состояния
+                button.classList.add('active');
+
+                setTimeout(() => {
+                    button.classList.remove('active');
+                    button.click();
+                }, 150);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="e name k1"> <span id="k1_name">Наши</span></div>
+        <div class="e point k1"> <span id="k1_point">0</span> </div>
+        <div class="e point k2"> <span id="k2_point">0</span></div>
+        <div class="e name k2"> <span id="k2_name">Чужие</span></div>
+
+        <div id="TimePanel">
+            <div class="e time"> <span id="time">00:00<span></div>
+            <div class="e time" id="period"> <span id="timeAdd">т1<span></div>
+            <div class="e text"> <span id="text">Перерыв<span></div>
+        </div>
+    </div>
+
+
+    <div class="bottom" id="divbot">
+        <div class="stoka">
+            <div style="display: inline-block;"><label for="name" style="display: block;">Команда слева:</label>
+                <input type="text" id="name" name="name" size="15" style="display: block;" />
+                <button type="button" class="big" onclick="btn_click_add(1,'k1_point',this)" id="bu_left">Счёт
+                    +</button>
+                <button type="button" onclick="btn_click_add(-1,'k1_point',this)">Счёт -</button>
+
+            </div>
+            <button type="button" onclick="stopGoalSound()" class="big" id="bu_down">Стоп<br>трек</button>
+            <div style="display: inline-block;"><label for="name2" style="display: block;">Команда справа:</label>
+                <input type="text" id="name2" name="name2" size="15" style="display: block;" />
+                <button type="button" onclick="btn_click_add(-1,'k2_point',this)">Счёт -</button>
+                <button type="button" class="big" onclick="btn_click_add(1,'k2_point',this)" id="bu_right">Счёт
+                    +</button>
+            </div>
+            <button type="button" class="big" onclick="stop()" id="pause" disabled>Пауза</button>
+            <button type="button" class="big" onclick="start()" id="start">Старт</button>
+            <button type="button" class="big" id="perer" onclick="setPere()">Перерыв</button>
+            <div style="display: inline-block;"><button type="button" onclick="btn_click_load(true)"
+                    style="display: block;">Загрузить названия<br>и новый матч</button>
+                <button type="button" onclick="btn_click_revers()">Реверс</button>
+            </div>
+
+            <div style="display: inline-block;">
+                <button type="button" onclick="btn_click_nulPoint()" style="display: block;">Обнулить счёт</button>
+                <button type="button" onclick="btn_click_load(false)">Загрузить данные</button>
+            </div>
+
+            <div style="display: inline-block;"> <button type="button" onclick="timeNew()" style="display: block;"
+                    id="buSetTimeManual">выставить на 15:00</button>
+                <button type="button" onclick="setNumberTime(1)" style="display: block;">тайм 1</button>
+                <button type="button" onclick="setNumberTime(2)" style="display: block;">тайм 2</button>
+            </div>
+
+            <div style="display: inline-block;">
+                <button type="button" disabled id="seclent" style="display: block;"></button>
+                <button type="button" onclick="retimeMinute(+1)" style="display: block;">Длинее</button>
+                <button type="button" onclick="retimeMinute(-1)" style="display: block;">Короче</button>
+            </div>
+            <div style="display: inline-block;">
+                <input type="text" id="minCount" name="minCount" size="5" />
+                <button type="button" onclick="setTimeLents()" style="display: block;">Задать длину Тайма</button>
+            </div>
+            <button type="button" id="timeCiller" onclick="timeCiller()">Скрыть тайм</button>
+
+            <button type="button" id="autoAlarm" onclick="autoAlarmSwith()">Отключить автосирену</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
