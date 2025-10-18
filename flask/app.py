@@ -9,6 +9,10 @@ app = Flask(__name__)
 def game():
     return render_template('master_dipS.html')
 
+@app.route('/tablo')
+def tablo():
+    return render_template('roint_slave.html')
+
 connected = set()
 slave = None
 master = None
@@ -20,7 +24,7 @@ async def echo(websocket):
     if not websocket in connected:
         connected.add(websocket)
         print(f"У нас новенький: {websocket}")
-        await websocket.send("?")
+        # await websocket.send("?")
     else:
         print(f"Этого знаю: {websocket}")
     
@@ -28,11 +32,13 @@ async def echo(websocket):
         isComputeMessege = False
         if "I_Master" in message:
             master = websocket
-            await websocket.send("You_Master")
+            #await websocket.send("You_Master")
+            print("Назначен мастер")
             isComputeMessege = True
         if "I_Slave" in message:
             slave = websocket
-            await websocket.send("You_Slave")
+            # await websocket.send("You_Slave")
+            print("Назначен слайв")
             isComputeMessege = True
         if websocket == master and not slave == None:
             print(f'Пришло сообщение: {message} отправлено к slave')
@@ -47,8 +53,8 @@ async def echo(websocket):
             print(f'Пришло сообщение: {message} - не обработанно')
 
 async def websocket_server():
-    async with serve(echo, "localhost", 8765) as server:
-        print("WebSocket сервер запущен на ws://localhost:8765")
+    async with serve(echo, "localhost", 8080) as server:
+        print("WebSocket сервер запущен на ws://localhost:8080")
         await server.serve_forever()
 
 def run_websocket_server():

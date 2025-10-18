@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Табло для трансляции</title>
+    <style>
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .main {
+            float: right;
+        }
+
+        .e {
+            float: left;
+            transform: skew(-20deg);
+            margin-left: 5px;
+            line-height: 35px;
+            text-align: center;
+            padding-top: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
+        }
+
+        .time,
+        .text {
+            background: rgb(255 255 0);
+        }
+
+
+        span {
+            display: inline-block;
+            transform: skew(20deg);
+            font-family: "Roboto", sans-serif;
+            /* font-weight: 500; */
+            font-style: normal;
+            font-size: 30pt;
+        }
+
+        .k1 {
+            background: rgb(153 153 255);
+        }
+
+        .k2 {
+            background: rgb(255 51 102);
+        }
+
+        #TimePanel {
+            float: left;
+            width: 250px;
+        }
+
+        .text {
+            display: none;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='dataTransfer_resiver.js') }}"></script>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="e name k1"> <span id="k1_name">Наши</span></div>
+        <div class="e point k1"> <span id="k1_point">0</span> </div>
+        <div class="e point k2"> <span id="k2_point">0</span></div>
+        <div class="e name k2"> <span id="k2_name">Чужие</span></div>
+
+        <div id="TimePanel">
+            <div class="e time"> <span id="time">00:00<span></div>
+            <div class="e time" id="period"> <span id="timeAdd">т1<span></div>
+            <div class="e text"> <span id="text">Перерыв<span></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

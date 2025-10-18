@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Автономаное табло для трансляции</title>
+    <script src="music.js"></script>
+    <script src="script.js"></script>
+    <style>
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .main {
+            float: right;
+            /* margin-right: 5px; */
+        }
+
+        .e {
+            float: left;
+            transform: skew(-20deg);
+            margin-left: 5px;
+            line-height: 35px;
+            text-align: center;
+            padding-top: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
+        }
+
+        .time,
+        .text {
+            background: rgb(255 255 0);
+        }
+
+
+        span {
+            display: inline-block;
+            transform: skew(20deg);
+            font-family: "Roboto", sans-serif;
+            /* font-weight: 500; */
+            font-style: normal;
+            font-size: 30pt;
+        }
+
+        .k1 {
+            background: rgb(153 153 255);
+        }
+
+        .k2 {
+            background: rgb(255 51 102);
+        }
+
+        #TimePanel {
+            float: left;
+            width: 250px;
+        }
+
+        .text {
+            display: none;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            background: rgb(80, 80, 80);
+            left: 0;
+            width: 100%;
+            padding-left: 10px;
+        }
+
+        .stoka {
+            margin-bottom: 10px;
+        }
+
+        .big {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #bu_right,
+        #bu_left,
+        #start,
+        #pause,
+        #bu_down,
+        #timout {
+            transition: all 0.15s ease;
+        }
+
+        #bu_right.active,
+        #bu_left.active,
+        #start.active,
+        #pause.active,
+        #bu_down.active,
+        #timout.active {
+            transform: scale(0.95) translateY(2px);
+            background-color: #d3fd8e;
+        }
+
+        .sound{
+            background-color: #F0E68C;
+        }
+
+        #bu_down{
+            background-color: #8cc3f0;
+        }
+        #perer{
+            padding: 1px 6px 1px 6px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="e name k1"> <span id="k1_name">Наши</span></div>
+        <div class="e point k1"> <span id="k1_point">0</span> </div>
+        <div class="e point k2"> <span id="k2_point">0</span></div>
+        <div class="e name k2"> <span id="k2_name">Чужие</span></div>
+
+        <div id="TimePanel">
+            <div class="e time"> <span id="time">00:00<span></div>
+            <div class="e time" id="period"> <span id="timeAdd">т1<span></div>
+            <div class="e text"> <span id="text">Перерыв<span></div>
+        </div>
+    </div>
+
+
+    <div class="bottom" id="divbot">
+        <div class="stoka">
+            <div style="display: inline-block;"><label for="name" style="display: block;">Команда слева:</label>
+                <input type="text" id="name" name="name" size="15" style="display: block;" />
+                <button type="button" class="big sound" onclick="btn_click_add(1,'k1_point',this)" id="bu_left">Счёт
+                    +</button>
+                <button type="button" onclick="btn_click_add(-1,'k1_point',this)">Счёт -</button>
+            </div>
+            
+            <button type="button" onclick="stopGoalSound()" class="big" id="bu_down">Стоп<br>трек</button>
+            
+            <div style="display: inline-block;"><label for="name2" style="display: block;">Команда справа:</label>
+                <input type="text" id="name2" name="name2" size="15" style="display: block;" />
+                <button type="button" onclick="btn_click_add(-1,'k2_point',this)">Счёт -</button>
+                <button type="button" class="big sound" onclick="btn_click_add(1,'k2_point',this)" id="bu_right">Счёт
+                    +</button>
+            </div>
+            <button type="button" class="big" onclick="stop()" id="pause" disabled>Пауза</button>
+            <button type="button" class="big" onclick="start()" id="start">Старт</button>
+            <div style="display: inline-block;">
+                <button type="button" class="big" id="perer" onclick="setPere()" style="display: block;">Перерыв<br>между тайм</button>
+                <button type="button" class="big sound" id="timout" onclick="timOut()" style="display: block;">Таймаут</button>
+
+            </div>
+
+            <div style="display: inline-block;"><button type="button" onclick="btn_click_load(true)"
+                    style="display: block;">Загрузить названия<br>и новый матч</button>
+                <button type="button" onclick="btn_click_revers()">Реверс</button>
+            </div>
+
+            <div style="display: inline-block;">
+                <button type="button" onclick="btn_click_nulPoint()" style="display: block;">Обнулить счёт</button>
+                <button type="button" onclick="btn_click_load(false)">Загрузить данные</button>
+            </div>
+
+            <div style="display: inline-block;"> <button type="button" onclick="timeNew()" style="display: block;"
+                    id="buSetTimeManual">выставить на 15:00</button>
+                <button type="button" onclick="setNumberTime(1)" style="display: block;">тайм 1</button>
+                <button type="button" onclick="setNumberTime(2)" style="display: block;">тайм 2</button>
+            </div>
+
+            <div style="display: inline-block;">
+                <button type="button" disabled id="seclent" style="display: block;"></button>
+                <button type="button" onclick="retimeMinute(+1)" style="display: block;">Длинее</button>
+                <button type="button" onclick="retimeMinute(-1)" style="display: block;">Короче</button>
+            </div>
+            <div style="display: inline-block;">
+                <input type="text" id="minCount" name="minCount" size="5" />
+                <button type="button" onclick="setTimeLents()" style="display: block;">Задать длину Тайма</button>
+                <button type="button" id="timeCiller" onclick="timeCiller()" style="display: block;">Скрыть тайм</button>
+            </div>
+            <div style="display: inline-block;">
+                <button type="button" class="big sound" id="autoAlarm" onclick="playMusic()" style="display: block;">Включить музыку</button>
+                <button type="button" id="autoAlarm" onclick="autoAlarmSwith()" style="display: block;">Отключить автосирену</button>
+                
+            </div>
+
+            
+        </div>
+
+    </div>
+
+</body>
+
+</html>

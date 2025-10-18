@@ -10,9 +10,24 @@ function collectNames() {
     document.querySelector("#team_label_right").textContent = game.team2
     setTimerColback()
 }
+const wsManager = new WebSocketManager_transmitor('ws://localhost:8080');
+wsManager.connect();
 
 function setTimerColback() {
-    game.timer.setOnTick((strTime) => { document.querySelector('#time_label').textContent = strTime })
+    game.timer.setOnTick((strTime) => {
+        document.querySelector('#time_label').textContent = strTime
+        const updatedDataPack = {
+            team_left_gol: "3",
+            team_left_fol: "6",
+            team_left_name: "Команда А",
+            team_right_gol: "2",
+            team_right_fol: "4",
+            team_right_name: "Команда Б",
+            time: strTime,
+            half: "2"
+        };
+        wsManager.sendDataPack(updatedDataPack);
+    })
 }
 
 function reverse() {
@@ -58,5 +73,5 @@ window.addEventListener('load', function () {
     document.querySelector('#goal_bu_left_sub').addEventListener('click', () => { game.decreaseTeam1Goals(); printGoals() });
     document.querySelector('#goal_bu_right_sub').addEventListener('click', () => { game.decreaseTeam2Goals(); printGoals() });
     document.querySelector('#goal_bu_right_add').addEventListener('click', () => { game.increaseTeam2Goals(); printGoals() });
-    
+
 });
