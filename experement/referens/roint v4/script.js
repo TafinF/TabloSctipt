@@ -192,6 +192,9 @@ function stopGoalSound() {
 function playMusic() {
      player.startAutoBreak()
 }
+function alrmPlay() {
+    player.playSiren()
+}
 document.addEventListener('keydown', function (event) {
     if (event.repeat) {
         return

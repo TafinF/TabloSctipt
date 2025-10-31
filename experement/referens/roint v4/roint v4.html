@@ -104,14 +104,32 @@
             background-color: #d3fd8e;
         }
 
-        .sound{
+        .sound {
             background-color: #F0E68C;
         }
 
-        #bu_down{
+        .sound:hover {
+            background-color: #e6d87c;
+        }
+
+        .sound:active {
+            background-color: #d3fd8e;
+            transform: translateY(1px);
+        }
+
+        #bu_down {
             background-color: #8cc3f0;
         }
-        #perer{
+
+        #bu_down:hover {
+            background-color: #6d9fc9;
+        }
+
+        #bu_down:active {
+            background-color: #d3fd8e;
+        }
+
+        #perer {
             padding: 1px 6px 1px 6px;
         }
     </style>
@@ -142,9 +160,9 @@
                     +</button>
                 <button type="button" onclick="btn_click_add(-1,'k1_point',this)">Счёт -</button>
             </div>
-            
+
             <button type="button" onclick="stopGoalSound()" class="big" id="bu_down">Стоп<br>трек</button>
-            
+
             <div style="display: inline-block;"><label for="name2" style="display: block;">Команда справа:</label>
                 <input type="text" id="name2" name="name2" size="15" style="display: block;" />
                 <button type="button" onclick="btn_click_add(-1,'k2_point',this)">Счёт -</button>
@@ -154,14 +172,16 @@
             <button type="button" class="big" onclick="stop()" id="pause" disabled>Пауза</button>
             <button type="button" class="big" onclick="start()" id="start">Старт</button>
             <div style="display: inline-block;">
-                <button type="button" class="big" id="perer" onclick="setPere()" style="display: block;">Перерыв<br>между тайм</button>
-                <button type="button" class="big sound" id="timout" onclick="timOut()" style="display: block;">Таймаут</button>
+                <button type="button" class="big" id="perer" onclick="setPere()"
+                    style="display: block;">Перерыв<br>между тайм</button>
+                <button type="button" class="big sound" id="timout" onclick="timOut()"
+                    style="display: block;">Таймаут</button>
 
             </div>
 
             <div style="display: inline-block;"><button type="button" onclick="btn_click_load(true)"
                     style="display: block;">Загрузить названия<br>и новый матч</button>
-                <button type="button" onclick="btn_click_revers()">Реверс</button>
+                <button type="button" onclick="btn_click_revers()">Реверс названий</button>
             </div>
 
             <div style="display: inline-block;">
@@ -176,22 +196,33 @@
             </div>
 
             <div style="display: inline-block;">
+                <label for="name" style="display: block;">Длина секунды</label>
                 <button type="button" disabled id="seclent" style="display: block;"></button>
-                <button type="button" onclick="retimeMinute(+1)" style="display: block;">Длинее</button>
-                <button type="button" onclick="retimeMinute(-1)" style="display: block;">Короче</button>
+                <div style="display: block;">
+                    <button type="button" onclick="retimeMinute(+1)">+1</button>
+                    <button type="button" onclick="retimeMinute(+10)">+10</button>
+                </div>
+                <div style="display: block;">
+                    <button type="button" onclick="retimeMinute(-1)">-1</button>
+                    <button type="button" onclick="retimeMinute(-10)">-10</button>
+                </div>
             </div>
             <div style="display: inline-block;">
                 <input type="text" id="minCount" name="minCount" size="5" />
                 <button type="button" onclick="setTimeLents()" style="display: block;">Задать длину Тайма</button>
-                <button type="button" id="timeCiller" onclick="timeCiller()" style="display: block;">Скрыть тайм</button>
+                <button type="button" id="timeCiller" onclick="timeCiller()" style="display: block;">Скрыть
+                    тайм</button>
             </div>
             <div style="display: inline-block;">
-                <button type="button" class="big sound" id="autoAlarm" onclick="playMusic()" style="display: block;">Включить музыку</button>
-                <button type="button" id="autoAlarm" onclick="autoAlarmSwith()" style="display: block;">Отключить автосирену</button>
-                
+                <button type="button" class="big sound" id="play" onclick="playMusic()" style="display: block;">Включить
+                    музыку</button>
+                <button type="button" id="autoAlarm" onclick="autoAlarmSwith()" style="display: block;">Отключить
+                    автосирену</button>
+                <button type="button" class="sound" id="alarm" onclick="alrmPlay()"
+                    style="display: block;">Сирена!</button>
             </div>
 
-            
+
         </div>
 
     </div>
